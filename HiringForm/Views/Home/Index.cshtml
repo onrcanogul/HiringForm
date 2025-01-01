@@ -1,0 +1,259 @@
+﻿<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+    .form-section {
+        margin-bottom: 20px;
+    }
+
+    h5 {
+        color: #4CAF50;
+        border-bottom: 2px solid #4CAF50;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+
+    .form-control, .form-select, textarea {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus, .form-select:focus, textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+
+    textarea {
+        resize: none;
+    }
+
+    .btn-primary {
+        background-color: #4CAF50;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+    .form-check-label {
+        margin-left: 5px;
+        color: #555;
+    }
+
+    .form-check-input:checked {
+        background-color: #4CAF50;
+        border-color: #4CAF50;
+    }
+</style>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Teknopark İş Başvuru Formu</h2>
+    <form>
+        <div class="row">
+            <!-- Kişisel Bilgiler -->
+            <div class="col-md-6 form-section">
+                <h5 class="mb-3">Kişisel Bilgiler</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Ad">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="surname" placeholder="Soyad">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="birthplace" placeholder="Doğum Yeri">
+                </div>
+                <div class="mb-3">
+                    <input type="date" class="form-control" id="birthdate" placeholder="Doğum Tarihi">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label d-block">Cinsiyet</label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="male" name="gender" value="male" class="form-check-input">
+                        <label for="male" class="form-check-label">Erkek</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="female" name="gender" value="female" class="form-check-input">
+                        <label for="female" class="form-check-label">Kadın</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" id="marital">
+                        <option value="" disabled selected>Medeni Durum</option>
+                        <option>Bekar</option>
+                        <option>Evli</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- İletişim Bilgileri -->
+            <div class="col-md-6 form-section">
+                <h5 class="mb-3">İletişim Bilgileri</h5>
+                <div class="mb-3">
+                    <textarea class="form-control" id="address" rows="2" placeholder="Adres"></textarea>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="city" placeholder="Şehir">
+                </div>
+                <div class="mb-3">
+                    <input type="tel" class="form-control" id="phone" placeholder="Telefon">
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="Mail">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Eğitim Bilgileri -->
+            <div class="col-md-6 form-section">
+                <h5 class="mb-3">Eğitim Bilgileri</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="school" placeholder="Lise Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="lise-city" placeholder="Şehir">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="school-time" placeholder="Başlangıç-Bitiş Zamanı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="school-degree" placeholder="Mezuniyet Derecesi">
+                </div>
+                <br/>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university" placeholder="Üniversite Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university-city" placeholder="Şehir">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university-time" placeholder="Başlangıç-Bitiş Zamanı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university-degree" placeholder="Mezuniyet Derecesi">
+                </div>
+                <br/>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university" placeholder="Üniversite Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university-city" placeholder="Şehir">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university-time" placeholder="Başlangıç-Bitiş Zamanı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="university-degree" placeholder="Mezuniyet Derecesi">
+                </div>
+            </div>
+
+            <!-- İş Tecrübesi -->
+            <div class="col-md-6 form-section">
+                <h5 class="mb-3">İş Tecrübesi</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="experience" placeholder="Kaç Ay Tecrübeniz Var?">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="company" placeholder="Firma Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="sector" placeholder="Sektör">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="position" placeholder="Pozisyon">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="work-duration" placeholder="Çalışma Süresi">
+                </div>
+            </div>
+            <!-- Yabancı Dil Bilgisi -->
+            <div class="col-md-6 form-section">
+                <h5 class="mb-3">Yabancı Dil Bilgisi</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="languages-known" placeholder="Kaç Dil Biliyorsunuz?">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="foreign-languages" rows="2" placeholder="Hangi Diller?"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6 form-section">
+                <h5 class="mb-3">Staj Bilgileri</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-company1" placeholder="Firma Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-sector1" placeholder="Sektör">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-position1" placeholder="Pozisyon">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-duration1" placeholder="Çalışma Süresi">
+                </div>
+                <br/>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-company2" placeholder="Firma Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-sector2" placeholder="Sektör">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-position2" placeholder="Pozisyon">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-duration2" placeholder="Çalışma Süresi">
+                </div>
+                <br />
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-company1" placeholder="Firma Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-sector1" placeholder="Sektör">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-position1" placeholder="Pozisyon">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="intern-duration1" placeholder="Çalışma Süresi">
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="row">
+            <!-- Tamamlayıcı Bilgiler -->
+            <div class="col-md-12 form-section">
+                <h5 class="mb-3">Tamamlayıcı Bilgiler</h5>
+                <div class="mb-3">
+                    <textarea class="form-control" id="additional" rows="3" placeholder="Eklemek istediğiniz notlar"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-3">Başvur</button>
+        </div>
+    </form>
+</div>
