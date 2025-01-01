@@ -27,7 +27,9 @@ namespace HiringForm.Repositories
 
         public async Task<List<Applicant>> GetApplicantsOrderedByScoreAsync()
         {
-            return await _context.Applicants.OrderByDescending(a => a.Score).ToListAsync();
+            return await _context.Applicants
+            .Where(x => x.IsCalledToInterview && !x.IsEliminated)
+            .OrderByDescending(a => a.Score).ToListAsync();
         }
 
         public async Task SaveChangesAsync()

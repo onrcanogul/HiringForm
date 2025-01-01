@@ -1,3 +1,8 @@
+using HiringForm.Contexts;
+using HiringForm.Repositories;
+using HiringForm.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace HiringForm
 {
     public class Program
@@ -6,8 +11,23 @@ namespace HiringForm
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddScoped<IApplicantService, ApplicantService>();
+            builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
+
+            builder.Services.AddDbContext<HiringFormContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("Db")));
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
             var app = builder.Build();
 
@@ -23,6 +43,8 @@ namespace HiringForm
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 

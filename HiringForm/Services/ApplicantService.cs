@@ -21,7 +21,7 @@ namespace HiringForm.Services
 
         public async Task AddApplicantAsync(Applicant applicant)
         {
-            applicant.Score = CalculateScore(applicant); // Calculate score before saving
+            applicant.Score = CalculateScore(applicant);
             await _repository.AddApplicantAsync(applicant);
             await _repository.SaveChangesAsync();
         }
@@ -33,22 +33,42 @@ namespace HiringForm.Services
 
         public int CalculateScore(Applicant applicant)
         {
+            if (!applicant.ProgrammingLanguages.Any(x => x.Language == "Java" || x.Language == "Python"))
+            {
+                applicant.IsEliminated = true;
+                return 0;
+            }
             int score = 0;
-
-            // Example scoring rules
-            if (applicant.KnownLanguages != null && applicant.KnownLanguages.Contains("English"))
+            var rules = new List<Func<Applicant, int>>()
             {
-                score += 2;
+            a => a.ProgrammingLanguages.Count(x => x.Language != null) > 3 ? 20 : 0,
+            a => a.ProgrammingLanguages.Count(x => x.Language != null) == 2 ? 10 : 0,
+            a => a.ProgrammingLanguages.Count(x => x.Language != null) == 1 ? 5 : 0,
+            a => a.KnownLanguages.Any(x => x.Language == "İngilizce") ? 15 : 0,
+            a => a.KnownLanguages.Count() > 0 ? a.KnownLanguages.Count() * 5 : 0,
+            a => a.Educations.Any(x => x.Degree == "Yüksek Lisans") ? 20 : 0,
+            a => a.Educations.Any(x => x.Degree == "Lisans") ? 10 : 0,
+            a => a.WorkExperiences.Any(x => x.Experience >= 3) ? 25 : 0,
+            a => a.WorkExperiences.Any(x => x.Experience < 3 && x.Experience > 1) ? 15 : 0,
+            a => a.WorkExperiences.Any(x => x.Experience < 1 && x.Experience > 0) ? 5 : 0,
+            a => a.KpssGrade > 80 ? 30 : 0,
+            a => a.KpssGrade > 70 ? 15 : 5,
+            a => a.EnglishLevel == "main" ? 20 : 0,
+            a => a.EnglishLevel == "full-prof" ? 15 : 0,
+            a => a.EnglishLevel == "prof" ? 10 : 0,
+            a => a.EnglishLevel == "limited" ? 5 : 0,
+            a => a.Internships.Count(x => x.CompanyName != null) >= 2 ? 10 : 0,
+            a => a.Internships.Count(x => x.CompanyName != null) == 1 ? 5 : 0
+            };
+
+            foreach (var rule in rules)
+            {
+                score += rule(applicant);
             }
 
-            if (applicant.NumberOfLanguages > 2)
+            if (score > 100)
             {
-                score += applicant.NumberOfLanguages;
-            }
-
-            if (applicant.ProgrammingLanguages != null && applicant.ProgrammingLanguages.Count > 0)
-            {
-                score += applicant.ProgrammingLanguages.Count;
+                applicant.IsCalledToInterview = true;
             }
 
             return score;

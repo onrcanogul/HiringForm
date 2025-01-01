@@ -1,4 +1,5 @@
-﻿<style>
+﻿@model HiringForm.Models.Entities.Applicant;
+<style>
     body {
         font-family: Arial, sans-serif;
         background-color: #f9f9f9;
@@ -19,6 +20,9 @@
         font-weight: bold;
     }
 
+    using HiringForm.Models.Entities;
+    using HiringForm.Models.Entities;
+
     .form-section {
         margin-bottom: 20px;
     }
@@ -30,17 +34,21 @@
         margin-bottom: 15px;
     }
 
-    .form-control, .form-select, textarea {
+    .form-control,
+    .form-select,
+    textarea {
         border: 1px solid #ddd;
         border-radius: 4px;
         transition: all 0.3s ease;
     }
 
-        .form-control:focus, .form-select:focus, textarea:focus {
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-            outline: none;
-        }
+    .form-control:focus,
+    .form-select:focus,
+    textarea:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        outline: none;
+    }
 
     textarea {
         resize: none;
@@ -52,9 +60,9 @@
         transition: background-color 0.3s ease;
     }
 
-        .btn-primary:hover {
-            background-color: #45a049;
-        }
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
 
     .form-check-label {
         margin-left: 5px;
@@ -68,23 +76,25 @@
 </style>
 
 <div class="container my-5">
-    <h2 class="text-center mb-4">Teknopark İş Başvuru Formu</h2>
-    <form>
+    <h2 class="text-center mb-4">İş Başvuru Formu</h2>
+    <form method="post" action="/home/create">
         <div class="row">
             <!-- Kişisel Bilgiler -->
             <div class="col-md-6 form-section">
                 <h5 class="mb-3">Kişisel Bilgiler</h5>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="name" placeholder="Ad">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Ad" required>
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="surname" placeholder="Soyad">
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyad" required>
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="birthplace" placeholder="Doğum Yeri">
+                    <input type="text" class="form-control" id="birthplace" name="birthplace" placeholder="Doğum Yeri"
+                        required>
                 </div>
                 <div class="mb-3">
-                    <input type="date" class="form-control" id="birthdate" placeholder="Doğum Tarihi">
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Doğum Tarihi"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label d-block">Cinsiyet</label>
@@ -98,7 +108,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <select class="form-select" id="marital">
+                    <select class="form-select" name="MaritalStatus" id="marital" required>
                         <option value="" disabled selected>Medeni Durum</option>
                         <option>Bekar</option>
                         <option>Evli</option>
@@ -110,16 +120,17 @@
             <div class="col-md-6 form-section">
                 <h5 class="mb-3">İletişim Bilgileri</h5>
                 <div class="mb-3">
-                    <textarea class="form-control" id="address" rows="2" placeholder="Adres"></textarea>
+                    <textarea class="form-control" id="address" name="address" rows="2" placeholder="Adres"
+                        required></textarea>
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="city" placeholder="Şehir">
+                    <input type="text" class="form-control" name="city" id="city" placeholder="Şehir" required>
                 </div>
                 <div class="mb-3">
-                    <input type="tel" class="form-control" id="phone" placeholder="Telefon">
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="Telefon" required>
                 </div>
                 <div class="mb-3">
-                    <input type="email" class="form-control" id="email" placeholder="Mail">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Mail" required>
                 </div>
             </div>
         </div>
@@ -129,131 +140,242 @@
             <div class="col-md-6 form-section">
                 <h5 class="mb-3">Eğitim Bilgileri</h5>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="school" placeholder="Lise Adı">
+                    <input type="text" class="form-control" name="Educations[0].schoolName" id="school"
+                        placeholder="Lise Adı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="lise-city" placeholder="Şehir">
+                    <input type="text" class="form-control" id="lise-city" name="Educations[0].city"
+                        placeholder="Şehir">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="school-time" placeholder="Başlangıç-Bitiş Zamanı">
+                    <input type="text" class="form-control" name="Educations[0].timePeriod" id="school-time"
+                        placeholder="Başlangıç-Bitiş Zamanı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="school-degree" placeholder="Mezuniyet Derecesi">
+                    <input type="text" class="form-control" name="Educations[0].degree" id="school-degree"
+                        placeholder="Mezuniyet Derecesi">
                 </div>
-                <br/>
+                <br />
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="university" placeholder="Üniversite Adı">
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="university-city" placeholder="Şehir">
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="university-time" placeholder="Başlangıç-Bitiş Zamanı">
+                    <input type="text" class="form-control" name="Educations[1].schoolName" id="university"
+                        placeholder="Üniversite Adı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="university-degree" placeholder="Mezuniyet Derecesi">
-                </div>
-                <br/>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="university" placeholder="Üniversite Adı">
+                    <input type="text" class="form-control" name="Educations[1].city" id="university-city"
+                        placeholder="Şehir">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="university-city" placeholder="Şehir">
+                    <input type="text" class="form-control" name="Educations[1].timePeriod" id="university-time"
+                        placeholder="Başlangıç-Bitiş Zamanı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="university-time" placeholder="Başlangıç-Bitiş Zamanı">
+                    <input type="text" class="form-control" name="Educations[1].degree" id="university-degree"
+                        placeholder="Mezuniyet Derecesi">
+                </div>
+                <br />
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Educations[2].schoolName" id="university"
+                        placeholder="Üniversite Adı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="university-degree" placeholder="Mezuniyet Derecesi">
+                    <input type="text" class="form-control" name="Educations[2].city" id="university-city"
+                        placeholder="Şehir">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Educations[2].timePeriod" id="university-time"
+                        placeholder="Başlangıç-Bitiş Zamanı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Educations[2].degree" id="university-degree"
+                        placeholder="Mezuniyet Derecesi">
+                </div>
+                <br />
+                <div class="mb-3">
+                    <input type="number" max="100" min="0" class="form-control" name="kpssGrade" id="kpssGrade"
+                        placeholder="KPSS Notu">
                 </div>
             </div>
-
             <!-- İş Tecrübesi -->
             <div class="col-md-6 form-section">
                 <h5 class="mb-3">İş Tecrübesi</h5>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="experience" placeholder="Kaç Ay Tecrübeniz Var?">
+                    <input type="text" class="form-control" name="WorkExperiences[0].experience" id="experience"
+                        placeholder="Kaç Ay Tecrübeniz Var?">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="company" placeholder="Firma Adı">
+                    <input type="text" class="form-control" name="WorkExperiences[0].companyName" id="company"
+                        placeholder="Firma Adı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="sector" placeholder="Sektör">
+                    <input type="text" class="form-control" name="WorkExperiences[0].sector" id="sector"
+                        placeholder="Sektör">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="position" placeholder="Pozisyon">
+                    <input type="text" class="form-control" name="WorkExperiences[0].position" id="position"
+                        placeholder="Pozisyon">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="work-duration" placeholder="Çalışma Süresi">
+                    <input type="text" class="form-control" name="WorkExperience[0].duration" id="work-duration"
+                        placeholder="Çalışma Süresi">
                 </div>
             </div>
-            <!-- Yabancı Dil Bilgisi -->
             <div class="col-md-6 form-section">
-                <h5 class="mb-3">Yabancı Dil Bilgisi</h5>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="languages-known" placeholder="Kaç Dil Biliyorsunuz?">
+                <h5 class="mb-3">Bilgisayar Bilgisi</h5>
+                <!-- Programlama Dilleri -->
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="python" name="ProgrammingLanguages"
+                        value="Python">
+                    <label class="form-check-label" for="python">Python</label>
                 </div>
-                <div class="mb-3">
-                    <textarea class="form-control" id="foreign-languages" rows="2" placeholder="Hangi Diller?"></textarea>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="java" name="ProgrammingLanguages" value="Java">
+                    <label class="form-check-label" for="java">Java</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="matlab" name="ProgrammingLanguages"
+                        value="Matlab">
+                    <label class="form-check-label" for="matlab">Matlab</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="proteus" name="ProgrammingLanguages"
+                        value="Proteus">
+                    <label class="form-check-label" for="dotnet">.Net</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="arduino" name="ProgrammingLanguages"
+                        value="Arduino">
+                    <label class="form-check-label" for="arduino">Arduino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="autocad" name="ProgrammingLanguages"
+                        value="AutoCAD">
+                    <label class="form-check-label" for="angular">Angular</label>
+                </div>
+                <!-- Diğer Bilgiler -->
+                <div class="mt-3">
+                    <label for="other-skills" class="form-label">Diğer Bilgisayar Bilginiz</label>
+                    <input type="text" class="form-control" id="other-skills" placeholder="Başka bilgilerinizi girin"
+                        name="ProgrammingLanguages">
+                </div>
+
+                <br />
+                <!-- Yabancı Dil Bilgisi -->
+                <div class="form-section">
+                    <h5 class="mb-3">Yabancı Dil Bilgisi</h5>
+                    <div class="form-group">
+                        <label for="KnownLanguages">Bildiğiniz Yabancı Diller</label>
+                        <div>
+                            <input type="checkbox" name="selectedLanguages" value="English" id="English" />
+                            <label for="English">İngilizce</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="selectedLanguages" value="German" id="German" />
+                            <label for="German">Almanca</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="selectedLanguages" value="French" id="French" />
+                            <label for="French">Fransızca</label>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="mb-3 form-group">
+                        <select id="english-level" class="form-select" name="englishLevel" style="display: none;">
+                            <option value="">İngilizce Seviyesi Seçiniz</option>
+                            <option value="beginner">Başlangıç Düzeyinde Yetkinlik</option>
+                            <option value="limited">Sınırlı Çalışma Yetkinliği</option>
+                            <option value="prof">Profesyonel Çalışma Yetkinliği</option>
+                            <option value="full-prof">Tam Profesyonel Yetkinliği</option>
+                            <option value="main">Ana Dil veya İkinci Dil Yetkinliği</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="languages-known" name="languagesKnown"
+                            placeholder="Kaç Dil Biliyorsunuz?">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="foreign-languages" rows="2" placeholder="Hangi Diller?"
+                            name="knownLanguagesText"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 form-section">
                 <h5 class="mb-3">Staj Bilgileri</h5>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-company1" placeholder="Firma Adı">
+                    <input type="text" class="form-control" id="intern-company1" name="Internships[0].companyName"
+                        placeholder="Firma Adı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-sector1" placeholder="Sektör">
+                    <input type="text" class="form-control" id="intern-sector1" name="Internships[0].sector"
+                        placeholder="Sektör">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-position1" placeholder="Pozisyon">
+                    <input type="text" class="form-control" id="intern-position1" name="Internships[0].position"
+                        placeholder="Pozisyon">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-duration1" placeholder="Çalışma Süresi">
-                </div>
-                <br/>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-company2" placeholder="Firma Adı">
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-sector2" placeholder="Sektör">
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-position2" placeholder="Pozisyon">
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-duration2" placeholder="Çalışma Süresi">
+                    <input type="text" class="form-control" id="intern-duration1" name="Internships[0].duration"
+                        placeholder="Çalışma Süresi">
                 </div>
                 <br />
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-company1" placeholder="Firma Adı">
+                    <input type="text" class="form-control" name="Internships[1].companyName" id="intern-company2"
+                        placeholder="Firma Adı">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-sector1" placeholder="Sektör">
+                    <input type="text" class="form-control" name="Internships[1].sector" id="intern-sector2"
+                        placeholder="Sektör">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-position1" placeholder="Pozisyon">
+                    <input type="text" class="form-control" name="Internships[1].position" id="intern-position2"
+                        placeholder="Pozisyon">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="intern-duration1" placeholder="Çalışma Süresi">
+                    <input type="text" class="form-control" name="Internships[1].duration" id="intern-duration2"
+                        placeholder="Çalışma Süresi">
                 </div>
-                
+                <br />
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Internships[2].companyName" id="intern-company1"
+                        placeholder="Firma Adı">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Internships[2].sector" id="intern-sector1"
+                        placeholder="Sektör">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Internships[2].position" id="intern-position1"
+                        placeholder="Pozisyon">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="Internships[2].duration" id="intern-duration1"
+                        placeholder="Çalışma Süresi">
+                </div>
             </div>
         </div>
-
-
         <div class="row">
             <!-- Tamamlayıcı Bilgiler -->
             <div class="col-md-12 form-section">
                 <h5 class="mb-3">Tamamlayıcı Bilgiler</h5>
                 <div class="mb-3">
-                    <textarea class="form-control" id="additional" rows="3" placeholder="Eklemek istediğiniz notlar"></textarea>
+                    <textarea class="form-control" id="additional" name="additionalNotes" rows="3"
+                        placeholder="Eklemek istediğiniz notlar"></textarea>
                 </div>
             </div>
         </div>
-
         <div class="text-center">
             <button type="submit" class="btn btn-primary mt-3">Başvur</button>
         </div>
     </form>
 </div>
+<script>
+    document.getElementById("English").addEventListener("change", function () {
+        const englishLevel = document.getElementById("english-level");
+        if (this.checked) {
+            englishLevel.style.display = "inline-block";
+        } else {
+            englishLevel.style.display = "none";
+            englishLevel.value = "";
+        }
+    });
+</script>
